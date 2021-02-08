@@ -29,35 +29,35 @@ public class CandidateSolution extends CandidateSolutionBase
          * 
          */
 
-        return DifficultyLevel.LEVEL_3;
+        return DifficultyLevel.LEVEL_1;
     }
 
     @Override
     public String getAnswer() throws IDBSSolutionException
     {
-//        /*
-//         * This is the default solution and provides some example code on how to extract data from Json in java.
-//         *
-//         * As an initial start we suggest you comment ALL the code below and return a null value from the method. Run
-//         * this in the assessment application and you'll see many examples of the Json that question produces.
-//         */
-//
-//        // first get Json as a String for the question using the inherited method...
-//        String json = getDataForQuestion();
-//
-//        // now use the json api to read the json to give a JsonObject representing the Json...
-//        JsonReader reader = Json.createReader(new StringReader(json));
-//        JsonObject jsonObject = reader.readObject();
-//        reader.close();
-//
-//        // now start extracting the data you need from the json....
-//
-//        // get the start value from the Json
-//        int startValue = jsonObject.getInt("startValue");
-//
-//        // read the values array from the json
-//        JsonArray jsonArray = jsonObject.getJsonArray("values");
-//
+        /*
+         * This is the default solution and provides some example code on how to extract data from Json in java.
+         *
+         * As an initial start we suggest you comment ALL the code below and return a null value from the method. Run
+         * this in the assessment application and you'll see many examples of the Json that question produces.
+         */
+
+        // first get Json as a String for the question using the inherited method...
+        String json = getDataForQuestion();
+
+        // now use the json api to read the json to give a JsonObject representing the Json...
+        JsonReader reader = Json.createReader(new StringReader(json));
+        JsonObject jsonObject = reader.readObject();
+        reader.close();
+
+        // now start extracting the data you need from the json....
+
+        // get the x value from the Json
+        int xValue = jsonObject.getInt("xValue");
+
+        // read the terms array from the json
+        JsonArray terms = jsonObject.getJsonArray("terms");
+
 //        // now sum the array
 //        int arraySum = 0;
 //
@@ -68,9 +68,8 @@ public class CandidateSolution extends CandidateSolutionBase
 //
 //        // calculate the answer..
 //        int answer = startValue - arraySum;
-//
-//        return Integer.toString(answer);
-    	return null;
+
+        return Integer.toString(xValue);
     }
 
 }
