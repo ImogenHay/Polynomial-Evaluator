@@ -21,6 +21,15 @@ public class Term {
 	 */
 	public Term(int power, int multiplier, String action) {
 		super();
+		if (power < 0) { //field validation to prevent creation of invalid terms
+			throw new IllegalArgumentException("Invalid power");
+		}
+		if (multiplier < 0) {
+			throw new IllegalArgumentException("Invalid multiplier");
+		}
+		if (action != "add" && action!= "subtract") {
+			throw new IllegalArgumentException("Invalid action");
+		}
 		this.power = power;
 		this.multiplier = multiplier;
 		this.action = action;
