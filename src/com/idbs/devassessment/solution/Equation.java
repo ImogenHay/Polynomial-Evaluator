@@ -54,4 +54,16 @@ public class Equation {
 		}
 		return result;
 	}
+
+
+
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer(); //creates StringBuffer object to make it easy to append more Strings
+		for (Term term : terms) { //loop repeated for each property in list of properties
+			buffer.append(term.toString() + " "); //adds output of toString method in House class to buffer
+		}
+		return buffer.toString(); //returns string displaying info on all properties in list depending on availability
+	}
+	
 }

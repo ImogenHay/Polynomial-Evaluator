@@ -3,6 +3,7 @@
  */
 package com.idbs.devassessment.solution;
 
+
 /**
  * @author imogenhay
  * Defines fields and methods of Term and allows you to evaluate term for given x.
@@ -41,7 +42,7 @@ public class Term {
 	 * @return the power
 	 */
 	public int getPower() {
-		return power;
+		return this.power;
 	}
 
 	
@@ -59,7 +60,7 @@ public class Term {
 	 * @return the multiplier
 	 */
 	public int getMultiplier() {
-		return multiplier;
+		return this.multiplier;
 	}
 
 	
@@ -77,7 +78,7 @@ public class Term {
 	 * @return the action
 	 */
 	public String getAction() {
-		return action;
+		return this.action;
 	}
 
 	
@@ -146,6 +147,19 @@ public class Term {
 		}
 		
 		return result;
+	}
+
+
+
+	@Override
+	public String toString() {
+		String action_symbol = "+ ";
+		
+		if(this.action == "subtract") { 
+			action_symbol = "- ";
+		}
+		
+		return action_symbol + this.multiplier + "x^" + this.power;
 	}
 	
 }
