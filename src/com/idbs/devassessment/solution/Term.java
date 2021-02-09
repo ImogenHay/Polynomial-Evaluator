@@ -28,7 +28,7 @@ public class Term {
 		if (multiplier < 0) {
 			throw new IllegalArgumentException("Invalid multiplier");
 		}
-		if (action != "add" && action!= "subtract") {
+		if (!action.equals("add")  && !action.equals("subtract")) {
 			throw new IllegalArgumentException("Invalid action");
 		}
 		this.power = power;
@@ -106,7 +106,7 @@ public class Term {
 			result = multiply(this.multiplier, result);
 		}
 		
-		if(this.action == "subtract") { //makes result negative if action is subtract
+		if(this.action.equals("subtract")) { //makes result negative if action is subtract
 			result = -result;
 		}
 		
@@ -155,11 +155,11 @@ public class Term {
 	public String toString() {
 		String action_symbol = "+ ";
 		
-		if(this.action == "subtract") { 
+		if(this.action.equals("subtract")) { 
 			action_symbol = "- ";
 		}
 		
-		return action_symbol + this.multiplier + "x^" + this.power;
+		return action_symbol + this.multiplier + "x^(" + this.power + ")";
 	}
 	
 }

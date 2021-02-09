@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * @author imogenhay
+ * Defines fields and methods of Equation and allows you to evaluate its terms 
  *
  */
 public class Equation {
@@ -63,7 +64,7 @@ public class Equation {
 		for (Term term : terms) { //loop repeated for each property in list of properties
 			buffer.append(term.toString() + " "); //adds output of toString method in House class to buffer
 		}
-		return buffer.toString(); //returns string displaying info on all properties in list depending on availability
+		return buffer.toString() + "\n"; //returns string displaying info on all properties in list depending on availability
 	}
 	
 }

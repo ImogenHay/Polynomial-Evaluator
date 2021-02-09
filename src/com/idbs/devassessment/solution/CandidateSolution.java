@@ -35,12 +35,11 @@ public class CandidateSolution extends CandidateSolutionBase
     @Override
     public String getAnswer() throws IDBSSolutionException
     {
-        /*
-         * This is the default solution and provides some example code on how to extract data from Json in java.
-         *
-         * As an initial start we suggest you comment ALL the code below and return a null value from the method. Run
-         * this in the assessment application and you'll see many examples of the Json that question produces.
-         */
+    	//Issues:
+    	//when multiplier is 0
+    	//when answer greater than 10 digits
+    	//
+
 
         // first get Json as a String for the question using the inherited method...
         String json = getDataForQuestion();
@@ -57,19 +56,24 @@ public class CandidateSolution extends CandidateSolutionBase
 
         // read the terms array from the json
         JsonArray terms = jsonObject.getJsonArray("terms");
+        
+        Equation equation = new Equation();
 
-//        // now sum the array
-//        int arraySum = 0;
-//
-//        for (int i = 0; i < jsonArray.size(); i++)
-//        {
-//            arraySum += jsonArray.getInt(i);
-//        }
-//
-//        // calculate the answer..
-//        int answer = startValue - arraySum;
+        // create term object for each term in Json Array
+        for (int i = 0; i < terms.size(); i++)
+        {
+        	JsonObject json_term = terms.getJsonObject(i);
+        	
+        	Term term = new Term(json_term.getInt("power"),json_term.getInt("multiplier"),json_term.getString("action"));
+        	
+        	equation.addTerm(term); // add terms to equation object  	
+        	
+        	 System.out.println(term.toString() + "=" + term.evaluate(xValue));
+        }
+        System.out.println(equation.toString() + "=" + equation.evaluate(xValue) + "\n");
 
-        return Integer.toString(xValue);
+
+        return Integer.toString(equation.evaluate(xValue));
     }
 
 }
