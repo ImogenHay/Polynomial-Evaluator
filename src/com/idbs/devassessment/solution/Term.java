@@ -97,20 +97,26 @@ public class Term {
 	 * @return the evaluated term
 	 */
 	public int evaluate(int xValue) {
-		int result = exponent(xValue, this.power); //calculate indices first (BIDMAS)
 		
-		if (result > this.multiplier) { //smaller value first so less loops required
-			result = multiply(result,this.multiplier); //multiply result by multiplier
+		if (this.multiplier == 0) { //anything multiplied by 0 is 0
+			return 0;
 		}
 		else {
-			result = multiply(this.multiplier, result);
+			int result = exponent(xValue, this.power); //calculate indices first (BIDMAS)
+			if (result > this.multiplier) { //smaller value first so less loops required
+				result = multiply(result,this.multiplier); //multiply result by multiplier
+			}
+			else {
+				result = multiply(this.multiplier, result);
+			}
+			
+			if(this.action.equals("subtract")) { //makes result negative if action is subtract
+				result = -result;
+			}
+			
+			return result;
 		}
-		
-		if(this.action.equals("subtract")) { //makes result negative if action is subtract
-			result = -result;
-		}
-		
-		return result;
+
 	}
 	
 	
