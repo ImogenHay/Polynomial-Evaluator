@@ -73,7 +73,7 @@ public class CandidateSolution extends CandidateSolutionBase
         System.out.println(equation.toString() + "=" + equation.evaluate(xValue) + "\n");
 
 
-        return Integer.toString(equation.evaluate(xValue));
+        return Long.toString(equation.evaluate(xValue));
     }
 
 }

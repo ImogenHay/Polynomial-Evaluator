@@ -48,8 +48,8 @@ public class Equation {
 	 * @param xValue to substituted into equation
 	 * @return the evaluated equation
 	 */
-	public int evaluate(int xValue) {
-		int result = 0;
+	public long evaluate(int xValue) {
+		long result = 0;
 		for(Term term : terms) {
 			result = result + term.evaluate(xValue);
 		}
