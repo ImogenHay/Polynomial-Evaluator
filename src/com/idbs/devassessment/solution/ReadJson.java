@@ -12,6 +12,7 @@ import javax.json.JsonReader;
 
 /**
  * @author imogenhay
+ *  Defines the fields and methods of different json input type
  *
  */
 public class ReadJson extends ReadData {
@@ -32,6 +33,9 @@ public class ReadJson extends ReadData {
 	
 	
 	
+	 /**
+	 * @return get X value from data
+	 */
 	@Override
 	public int getXValue() {
 		// get the x value from the Json
@@ -40,10 +44,13 @@ public class ReadJson extends ReadData {
 
 	
 	
+	 /**
+	 * creates term objects and adds to Equation
+	 */
 	@Override
 	protected void generateTerms() {
 		// read the terms array from the json
-		JsonArray terms = jsonObject.getJsonArray("terms");
+		JsonArray terms = this.jsonObject.getJsonArray("terms");
 		
 		 // create term object for each term in Json Array
         for (int i = 0; i < terms.size(); i++)
