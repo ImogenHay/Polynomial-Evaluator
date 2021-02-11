@@ -19,6 +19,7 @@ public class ReadNumeric extends ReadData {
 	 */
 	public ReadNumeric(String data) {
 		super(data);
+		this.data = data;
 		// use index of colon to determine between x value and terms
 		this.semiColonIndex = this.data.indexOf(";");
 	}

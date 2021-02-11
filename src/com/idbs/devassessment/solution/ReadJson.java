@@ -25,6 +25,7 @@ public class ReadJson extends ReadData {
 	 */
 	public ReadJson(String data) {
 		super(data);
+		this.data = data;
 		// use the json api to read the json to give a JsonObject representing the Json
 		JsonReader reader = Json.createReader(new StringReader(this.data));
 		this.jsonObject = reader.readObject();

@@ -27,14 +27,14 @@ public abstract class ReadData {
 	 /**
 	 * @return get X value from data
 	 */
-	public abstract int getXValue();
+	public abstract int getXValue(); // method to get X will depend on input format
 	
 	
 	
 	 /**
 	 * creates term objects and adds to Equation
 	 */
-	protected abstract void generateTerms();
+	protected abstract void generateTerms(); // method to generate terms will depend on input format
 	
 	
 	
