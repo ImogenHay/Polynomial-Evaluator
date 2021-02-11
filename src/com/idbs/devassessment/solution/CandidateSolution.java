@@ -23,7 +23,7 @@ public class CandidateSolution extends CandidateSolutionBase
          * 
          */
 
-        return DifficultyLevel.LEVEL_2;
+        return DifficultyLevel.LEVEL_3;
     }
 
     @Override

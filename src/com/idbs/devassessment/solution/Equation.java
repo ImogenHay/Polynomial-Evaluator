@@ -6,6 +6,8 @@ package com.idbs.devassessment.solution;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.idbs.devassessment.harness.DigitalTaxTracker;
+
 
 
 /**
@@ -50,8 +52,8 @@ public class Equation {
 	 */
 	public long evaluate(int xValue) {
 		long result = 0;
-		for(Term term : terms) {
-			result = result + term.evaluate(xValue);
+		for(Term term : terms) {		
+			result = DigitalTaxTracker.add(result,term.evaluate(xValue));
 		}
 		return result;
 	}

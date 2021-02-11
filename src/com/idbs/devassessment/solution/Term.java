@@ -3,6 +3,7 @@
  */
 package com.idbs.devassessment.solution;
 
+import com.idbs.devassessment.harness.DigitalTaxTracker;
 
 /**
  * @author imogenhay
@@ -128,7 +129,7 @@ public class Term {
 	private long multiply(long a, long b) {
 		long result = a;
 		for (int i = 1; i < b; i++) { // b should be smaller than a to reduce amount of loops
-			result = result + a; // add a to itself b times
+			result = DigitalTaxTracker.add(result, a); // add a to itself b times
 		}
 		return result;
 	}
