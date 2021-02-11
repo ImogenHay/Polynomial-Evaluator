@@ -1,0 +1,75 @@
+/**
+ * 
+ */
+package com.idbs.devassessment.solution;
+
+/**
+ * @author imogenhay
+ *
+ */
+public abstract class ReadData {
+
+	private String data = null;
+	private Equation equation = null;
+	
+	/**
+	 * @param data
+	 */
+	public ReadData(String data) {
+		super();
+		this.data = data;
+		this.equation = new Equation();
+	}
+	
+	
+	
+	 /**
+	 * @return get X value from data
+	 */
+	public abstract int getXValue();
+	
+	
+	
+	 /**
+	 * creates term objects and adds to Equation
+	 */
+	public abstract void generateTerms();
+	
+	
+	
+	/**
+	 * @return data
+	 */
+	public String getData() {
+		return this.data;
+	}
+	
+	
+	
+	/**
+	 * @param new data
+	 */
+	public void setData(String data) {
+		this.data = data;
+	}
+	
+	
+	
+	/**
+	 * @return equation
+	 */
+	public Equation getEquation() {
+		return this.equation;
+	}
+	
+	
+	
+	/**
+	 * @return result of evaluation of equation
+	 */
+	public String createTerms() {
+		int xValue = this.getXValue();
+		return Long.toString(this.equation.evaluate(xValue));
+	}
+	
+}
