@@ -5,12 +5,13 @@ package com.idbs.devassessment.solution;
 
 /**
  * @author imogenhay
+ * Defines the fields, methods and abstract methods of different input types
  *
  */
 public abstract class ReadData {
 
 	private String data = null;
-	private Equation equation = null;
+	protected Equation equation = null;
 	
 	/**
 	 * @param data
@@ -33,7 +34,7 @@ public abstract class ReadData {
 	 /**
 	 * creates term objects and adds to Equation
 	 */
-	public abstract void generateTerms();
+	protected abstract void generateTerms();
 	
 	
 	
@@ -67,9 +68,17 @@ public abstract class ReadData {
 	/**
 	 * @return result of evaluation of equation
 	 */
-	public String createTerms() {
+	public String getResult() {
 		int xValue = this.getXValue();
+		generateTerms();
 		return Long.toString(this.equation.evaluate(xValue));
+	}
+
+
+
+	@Override
+	public String toString() {
+		return this.equation.toString();
 	}
 	
 }
