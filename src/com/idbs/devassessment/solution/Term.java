@@ -22,13 +22,13 @@ public class Term {
 	 */
 	public Term(int power, int multiplier, String action) {
 		super();
-		if (power < 0) { //field validation to prevent creation of invalid terms
+		if (power < 0) { // field validation to prevent creation of invalid terms
 			throw new IllegalArgumentException("Invalid power");
 		}
 		if (multiplier < 0) {
 			throw new IllegalArgumentException("Invalid multiplier");
 		}
-		if (!action.equals("add")  && !action.equals("subtract")) {
+		if (!action.equals("add") && !action.equals("+") && !action.equals("subtract") && !action.equals("-")) {
 			throw new IllegalArgumentException("Invalid action");
 		}
 		this.power = power;
@@ -98,19 +98,19 @@ public class Term {
 	 */
 	public long evaluate(int xValue) {
 		
-		if (this.multiplier == 0) { //anything multiplied by 0 is 0
+		if (this.multiplier == 0) { // anything multiplied by 0 is 0
 			return 0;
 		}
 		else {
-			long result = exponent(xValue, this.power); //calculate indices first (BIDMAS)
-			if (result > this.multiplier) { //smaller value first so less loops required
-				result = multiply(result,this.multiplier); //multiply result by multiplier
+			long result = exponent(xValue, this.power); // calculate indices first (BIDMAS)
+			if (result > this.multiplier) { // smaller value first so less loops required
+				result = multiply(result,this.multiplier); // multiply result by multiplier
 			}
 			else {
 				result = multiply(this.multiplier, result);
 			}
 			
-			if(this.action.equals("subtract")) { //makes result negative if action is subtract
+			if(this.action.equals("subtract") || this.action.equals("-")) { // makes result negative if action is subtract
 				result = -result;
 			}
 			
@@ -127,8 +127,8 @@ public class Term {
 	 */
 	private long multiply(long a, long b) {
 		long result = a;
-		for (int i = 1; i < b; i++) { //b should be smaller than a to reduce amount of loops
-			result = result + a; //add a to itself b times
+		for (int i = 1; i < b; i++) { // b should be smaller than a to reduce amount of loops
+			result = result + a; // add a to itself b times
 		}
 		return result;
 	}
@@ -143,11 +143,11 @@ public class Term {
 	private long exponent(long x, int p) {
 		long result = x; 
 		
-		if(p == 0) { //anything to the power of 0 evaluates to 1
+		if(p == 0) { // anything to the power of 0 evaluates to 1
 			result = 1;
 		}
 		else { 
-			for(int i = 1; i < p; i++) { //multiply x by x, p times
+			for(int i = 1; i < p; i++) { // multiply x by x, p times
 				result = multiply(result,x);
 			}
 		}
@@ -161,7 +161,7 @@ public class Term {
 	public String toString() {
 		String action_symbol = "+ ";
 		
-		if(this.action.equals("subtract")) { 
+		if(this.action.equals("subtract") || this.action.equals("-")) { 
 			action_symbol = "- ";
 		}
 		
