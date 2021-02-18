@@ -101,7 +101,7 @@ public class Equation implements Calculations {
 				}			
 			}			
 		}
-		System.out.println(calculations.size()); // for debugging
+		//System.out.println(calculations.size()); // for debugging
 		return result;
 	}
 

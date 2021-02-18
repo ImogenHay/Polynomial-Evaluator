@@ -50,21 +50,26 @@ public class ReadJson extends ReadData {
 	 */
 	@Override
 	protected void generateTerms() {
-		// read the terms array from the json
-		JsonArray terms = this.jsonObject.getJsonArray("terms");
-		
-		 // create term object for each term in Json Array
-        for (int i = 0; i < terms.size(); i++)
-        {
-     	   JsonObject json_term = terms.getJsonObject(i);
-         	
-     	   Term term = new Term(json_term.getInt("power"),json_term.getInt("multiplier"),json_term.getString("action"));
-         	
-     	   this.equation.addTerm(term); // add terms to equation object  	
-         	
-         	//System.out.println(term.toString() + "=" + term.evaluate(xValue)); // for debugging
-        }
-        //System.out.println(equation.toString() + "=" + equation.evaluate(xValue) + "\n"); // for debugging
+		try {
+			// read the terms array from the json
+			JsonArray terms = this.jsonObject.getJsonArray("terms");
+			
+			 // create term object for each term in Json Array
+	        for (int i = 0; i < terms.size(); i++)
+	        {
+	     	   JsonObject json_term = terms.getJsonObject(i);
+	         	
+	     	   Term term = new Term(json_term.getInt("power"),json_term.getInt("multiplier"),json_term.getString("action"));
+	         	
+	     	   this.equation.addTerm(term); // add terms to equation object  	
+	         	
+	         	//System.out.println(term.toString() + "=" + term.evaluate(xValue)); // for debugging
+	        }
+	        //System.out.println(equation.toString() + "=" + equation.evaluate(xValue) + "\n"); // for debugging
+
+		}  catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Invalid Json Format");
+		}
 
 	}
 
