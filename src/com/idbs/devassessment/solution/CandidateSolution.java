@@ -6,6 +6,15 @@ package com.idbs.devassessment.solution;
 
 
 import com.idbs.devassessment.core.IDBSSolutionException;
+
+import java.io.StringReader;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonException;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+
+
 import com.idbs.devassessment.core.DifficultyLevel;
 
 /**
@@ -31,31 +40,40 @@ public class CandidateSolution extends CandidateSolutionBase
     @Override
     public String getAnswer() throws IDBSSolutionException
     {
-
+    	
         // first get Json as a String for the question using the inherited method...
-        String data = getDataForQuestion();
-       
+        String data = getDataForQuestion();  
+        
         String json = "";
         int prefix = data.indexOf(":");
         if (prefix != -1) {
         	json = data.substring(prefix+1,data.length()); // this will remove prefix
         }
 
+        
         ReadData reader = null; // subclass of ReadData used will depend on input format
         
-        if(data.startsWith("json")) { // can add alternative formats
-        	reader = new ReadJson(json);
-        }
-        else if(data.startsWith("numeric")) {
-        	reader = new ReadNumeric(json);
-        }       
         
-        if(reader == null) { // if not valid input
-        	return "Invalid Input Format";
-        }
-        else {
+        try {
+        	
+        	if(data.startsWith("json")) { // can add alternative formats
+            	reader = new ReadJson(json);
+            }
+            else if(data.startsWith("numeric")) {
+            	reader = new ReadNumeric(json);
+            }   
+        	
         	return reader.getResult();
+        	
+        } 
+        catch( IllegalArgumentException e ) { // if invalid format
+        	return "Invalid Input Format";
+        } 
+        catch( Exception e ) { // if other error occurs
+        	return null;
         }
+        
+            
             
     }
 

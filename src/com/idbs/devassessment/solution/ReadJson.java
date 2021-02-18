@@ -7,8 +7,10 @@ import java.io.StringReader;
 
 import javax.json.Json;
 import javax.json.JsonArray;
+import javax.json.JsonException;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
+
 
 /**
  * @author imogenhay
@@ -27,9 +29,13 @@ public class ReadJson extends ReadData {
 		super(data);
 		this.data = data;
 		// use the json api to read the json to give a JsonObject representing the Json
-		JsonReader reader = Json.createReader(new StringReader(this.data));
-		this.jsonObject = reader.readObject();
-		reader.close();
+		try {
+			JsonReader reader = Json.createReader(new StringReader(this.data));
+			this.jsonObject = reader.readObject();
+			reader.close();
+		}  catch (JsonException e) {
+			throw new IllegalArgumentException("Invalid Json Format");
+		}	
 	}
 	
 	
@@ -67,7 +73,7 @@ public class ReadJson extends ReadData {
 	        }
 	        //System.out.println(equation.toString() + "=" + equation.evaluate(xValue) + "\n"); // for debugging
 
-		}  catch (NumberFormatException e) {
+		}  catch (JsonException e) {
 			throw new IllegalArgumentException("Invalid Json Format");
 		}
 
