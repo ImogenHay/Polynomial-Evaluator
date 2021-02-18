@@ -15,7 +15,7 @@ import com.idbs.devassessment.harness.DigitalTaxTracker;
  * Defines fields and methods of Equation and allows you to evaluate its terms 
  *
  */
-public class Equation {
+public class Equation implements Calculations {
 	
 	/** List of Term objects in Equation*/
 	private List<Term> terms = null;
@@ -31,7 +31,7 @@ public class Equation {
 	/**
 	 * @param Term to be added to list of terms
 	 */
-	public void addTerm(Term term) {
+	public void addTerm(Term term){
 		terms.add(term);
 	}
 	
@@ -47,14 +47,61 @@ public class Equation {
 	
 	
 	/**
+	 * @param a, b, checks if they have been added together previously
+	 * @return previous calculation, or null if not found
+	 */
+	public ArrayList<Long> previouslyCalculated(long a, long b) {
+		ArrayList<Long> prevCalc = null;
+		for(ArrayList<Long> calculation : calculations) { // checks if current calculation has previously been calculated
+			if(calculation.get(0) == b && calculation.get(1) == a) {
+				prevCalc = calculation;
+				break; // so does not loop through rest of array if found answer
+			}
+			else if(calculation.get(0) == a && calculation.get(1) == b) { // order of addition does not effect result
+				prevCalc = calculation;
+				break;
+			}
+		}
+		return prevCalc;
+	}
+	
+	
+	
+	/**
 	 * @param xValue to substituted into equation
 	 * @return the evaluated equation
 	 */
 	public long evaluate(int xValue) {
 		long result = 0;
-		for(Term term : terms) {		
-			result = DigitalTaxTracker.add(result,term.evaluate(xValue));
+		for(Term term : terms) {	
+			long evaluated = term.evaluate(xValue);
+			
+			if (evaluated != 0) { // so wont do addition of zeros
+				
+				if (result == 0) { // if result is 0 no point in adding to 0
+					result = evaluated;
+				}
+				
+				else {
+					long current = result;
+					ArrayList<Long> previousCalculation = previouslyCalculated(current,evaluated);
+					
+					if(previousCalculation != null) { // if previously calculated use previous result
+						result = previousCalculation.get(2);
+					}
+					else {
+						result = DigitalTaxTracker.add(current, evaluated); // add a to itself b times
+						
+						ArrayList<Long> calculation = new ArrayList<Long>(); // stores calculation
+						calculation.add(current);
+						calculation.add(evaluated);
+						calculation.add(result);
+						calculations.add(calculation);
+					}	
+				}			
+			}			
 		}
+		System.out.println(calculations.size()); // for debugging
 		return result;
 	}
 

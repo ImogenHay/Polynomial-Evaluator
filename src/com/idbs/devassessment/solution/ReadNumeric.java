@@ -58,7 +58,7 @@ public class ReadNumeric extends ReadData {
      	    try {
      		    power = Integer.parseInt(numeric_term.charAt(numeric_term.length()-1) + "");
      	    } catch (NumberFormatException e) {
-     		    power = 1;
+     		    power = 1; // to the power of 1 same as having no power
      	    }
      	   
  		    int multiplier;

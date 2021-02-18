@@ -26,11 +26,11 @@ public class CandidateSolution extends CandidateSolutionBase
         return DifficultyLevel.LEVEL_3;
     }
 
+    
+    
     @Override
     public String getAnswer() throws IDBSSolutionException
     {
-
-
 
         // first get Json as a String for the question using the inherited method...
         String data = getDataForQuestion();
@@ -41,7 +41,7 @@ public class CandidateSolution extends CandidateSolutionBase
         	json = data.substring(prefix+1,data.length()); // this will remove prefix
         }
 
-        ReadData reader = null; // subclass of ReadData used will depending on input format
+        ReadData reader = null; // subclass of ReadData used will depend on input format
         
         if(data.startsWith("json")) { // can add alternative formats
         	reader = new ReadJson(json);
@@ -50,7 +50,7 @@ public class CandidateSolution extends CandidateSolutionBase
         	reader = new ReadNumeric(json);
         }       
         
-        if(reader == null) {
+        if(reader == null) { // if not valid input
         	return "Invalid Input Format";
         }
         else {

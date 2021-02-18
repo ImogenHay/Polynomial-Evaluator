@@ -3,6 +3,7 @@
  */
 package com.idbs.devassessment.solution;
 
+
 /**
  * @author imogenhay
  * Defines the fields, methods and abstract methods of different input types
@@ -71,6 +72,7 @@ public abstract class ReadData {
 	public String getResult() {
 		int xValue = this.getXValue();
 		generateTerms();
+		System.out.println(this.toString()); // for debugging
 		return Long.toString(this.equation.evaluate(xValue));
 	}
 
@@ -78,7 +80,8 @@ public abstract class ReadData {
 
 	@Override
 	public String toString() {
-		return this.equation.toString();
+		// shows equation, x value and result of evaluation
+		return this.equation.toString() + " = " + this.equation.evaluate(this.getXValue()) + " (x=" + this.getXValue() + ")";
 	}
 	
 }
