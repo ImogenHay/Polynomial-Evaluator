@@ -104,6 +104,7 @@ public class Equation implements Calculations {
 						calculation.add(evaluated);
 						calculation.add(result);
 						calculations.add(calculation);
+						System.out.println(calculation);
 					}	
 				}			
 			}			

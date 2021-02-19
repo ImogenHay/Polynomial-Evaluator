@@ -116,13 +116,8 @@ public class Term implements Calculations{
 		else {
 			long result = exponent(xValue, this.power); // calculate indices first (BIDMAS)
 
-			if (result > this.multiplier) { // smaller value first so less loops required
-				result = multiply(result,this.multiplier); // multiply result by multiplier
-			}
-			else {
-				result = multiply(this.multiplier, result);
-			}
-			
+			result = multiply(result,this.multiplier); // multiply result by multiplier
+
 			if(this.action.equals("subtract") || this.action.equals("-")) { // makes result negative if action is subtract
 				result = -result;
 			}
@@ -160,8 +155,15 @@ public class Term implements Calculations{
 	 * @return result of multiplication
 	 */
 	private long multiply(long a, long b) {
+		
+		if(b > a) { // b should be smaller than a to reduce amount of loops
+			long temp = a;
+			a = b;
+			b = temp;			
+		}
+		
 		long result = a;
-		for (int i = 1; i < b; i++) { // b should be smaller than a to reduce amount of loops
+		for (int i = 1; i < b; i++) { 
 			long current = result;
 			ArrayList<Long> previousCalculation = previouslyCalculated(current,a);
 			
@@ -176,6 +178,7 @@ public class Term implements Calculations{
 				calculation.add(a);
 				calculation.add(result);
 				calculations.add(calculation);
+				System.out.println(calculation);
 			}			
 			
 		}

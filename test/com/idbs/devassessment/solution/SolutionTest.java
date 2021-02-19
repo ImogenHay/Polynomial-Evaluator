@@ -6,6 +6,11 @@ import org.junit.Test;
 
 import com.idbs.devassessment.core.IDBSSolutionException;
 
+/**
+ * @author imogenhay
+ * Tests functionality of CandidateSolution class
+ */
+
 public class SolutionTest {
 
 	@Test // tests assertTrue is working

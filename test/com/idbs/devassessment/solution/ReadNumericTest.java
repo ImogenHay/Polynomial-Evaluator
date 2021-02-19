@@ -4,6 +4,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * @author imogenhay
+ * Tests functionality of ReadNumeric class
+ */
+
 public class ReadNumericTest {
 
 	@Test // tests assertTrue is working
