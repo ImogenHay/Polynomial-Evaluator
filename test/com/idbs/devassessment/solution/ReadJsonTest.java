@@ -52,10 +52,15 @@ public class ReadJsonTest {
 	public void testToString() {
 		ReadJson reader = new ReadJson("{\"xValue\" : 7,\"terms\" : [{ \"power\" : 0,  \"multiplier\" : 1, \"action\" :  \"add\"  },{ \"power\" : 2,  \"multiplier\" : 2, \"action\" :  \"subtract\"  },{ \"power\" : 3,  \"multiplier\" : 3, \"action\" :  \"add\"  },{ \"power\" : 1,  \"multiplier\" : 1, \"action\" :  \"subtract\"  }]}");
 		reader.getResult();
-		System.out.println(reader.toString());
 		assertEquals("+ 1x^(0) - 2x^(2) + 3x^(3) - 1x^(1) \n = 925 (x=7)\n" ,reader.toString());
 	}
 	
+	
+	// test if invalid json format with throw error
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidReadJson() {
+		ReadJson reader = new ReadJson("invalid input");
+	}
 	
 
 	
