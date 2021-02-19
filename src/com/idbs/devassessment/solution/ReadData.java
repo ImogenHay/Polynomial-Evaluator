@@ -49,15 +49,6 @@ public abstract class ReadData {
 	
 	
 	/**
-	 * @param new data
-	 */
-	public void setData(String data) {
-		this.data = data;
-	}
-	
-	
-	
-	/**
 	 * @return equation
 	 */
 	public Equation getEquation() {
@@ -71,7 +62,7 @@ public abstract class ReadData {
 	 */
 	public String getResult() {
 		int xValue = this.getXValue();
-		generateTerms();
+		this.generateTerms();
 		System.out.println(this.toString()); // for debugging
 		return Long.toString(this.equation.evaluate(xValue));
 	}

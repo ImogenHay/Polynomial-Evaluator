@@ -44,6 +44,7 @@ public class CandidateSolution extends CandidateSolutionBase
         
         ReadData reader = null; // subclass of ReadData used will depend on input format
         
+        System.out.println(json);
         
         try {
         	

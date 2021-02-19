@@ -28,7 +28,6 @@ public class EquationTest {
 		Equation equation = new Equation();
 		
 		assertEquals("\n" ,equation.toString());
-		//x =6, =-1976
 	}
 
 	
