@@ -45,6 +45,13 @@ public class Equation implements Calculations {
 	}
 	
 	
+	/**
+	 * @return the stored calculations
+	 */
+	public ArrayList<ArrayList<Long>> getCalculations() {
+		return calculations;
+	}
+	
 	
 	/**
 	 * @param a, b, checks if they have been added together previously

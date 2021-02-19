@@ -120,6 +120,7 @@ public class TermTest {
 	}
 	
 	
+	// test if invalid parameters with throw error
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPower() {
 		Term term = new Term(-1, 10, "-");

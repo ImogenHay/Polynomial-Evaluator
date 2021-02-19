@@ -29,4 +29,10 @@ public interface Calculations {
 	 * @return previous calculation, or null if not found
 	 */
 	public ArrayList<Long> previouslyCalculated(long a, long b);
+	
+	
+	/**
+	 * @return the stored calculations
+	 */
+	public ArrayList<ArrayList<Long>> getCalculations();
 }
