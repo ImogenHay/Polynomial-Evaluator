@@ -161,31 +161,49 @@ public class Term implements Calculations{
 			a = b;
 			b = temp;			
 		}
+			
+		long result = a; // if a multiplied by 1 result will be a
+		long twoA = 0; // will store value of a + a
+		long valueToAdd = 0;
 		
-		long result = a;
 		for (int i = 1; i < b; i++) { 
 			long current = result;
-			ArrayList<Long> previousCalculation = previouslyCalculated(current,a);
+			
+			// if a is going to be added to result more than one more time, and twoA has been calculated
+			if (b > (i+1) && i != 1) { 
+				valueToAdd = twoA; // add two a's in one addition since already know what a+a is
+				i++; // skips two steps since did two additions in one
+			}
+			else {
+				valueToAdd = a;
+			}
+			
+			ArrayList<Long> previousCalculation = previouslyCalculated(current,valueToAdd);
 			
 			if(previousCalculation != null) { // if previously calculated use previous result
 				result = previousCalculation.get(2);
 			}
 			else {
-				result = DigitalTaxTracker.add(current, a); // add a to itself b times
+				result = DigitalTaxTracker.add(current, valueToAdd);
 				
 				ArrayList<Long> calculation = new ArrayList<Long>(); // stores calculation
 				calculation.add(current);
-				calculation.add(a);
+				calculation.add(valueToAdd);
 				calculation.add(result);
 				calculations.add(calculation);
-				System.out.println(calculation);
-			}			
+				//System.out.println(calculation); // for debugging
+			}	
 			
+			if (i == 1) { // first iteration will be when value is added to itself, this will be 2* a
+				twoA = result; // stores so that 2 steps can be done in one addition
+			}
+			//System.out.println(i); // for debugging
+			//System.out.println(current + " + " + valueToAdd + " = " + result); // for debugging
 		}
 		return result;
 	}
 	
-	
+
 	
 	/**
 	 * @param x the given value of x
