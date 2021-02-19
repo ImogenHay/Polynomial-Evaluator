@@ -29,7 +29,7 @@ public class Equation implements Calculations {
 	
 	
 	/**
-	 * @param Term to be added to list of terms
+	 * @param TermTest to be added to list of terms
 	 */
 	public void addTerm(Term term){
 		terms.add(term);

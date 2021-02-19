@@ -65,7 +65,7 @@ public class ReadJson extends ReadData {
 	        {
 	     	   JsonObject json_term = terms.getJsonObject(i);
 	         	
-	     	   Term term = new Term(json_term.getInt("power"),json_term.getInt("multiplier"),json_term.getString("action"));
+	     	  Term term = new Term(json_term.getInt("power"),json_term.getInt("multiplier"),json_term.getString("action"));
 	         	
 	     	   this.equation.addTerm(term); // add terms to equation object  	
 	         	

@@ -96,12 +96,21 @@ public class Term implements Calculations{
 	
 	
 	/**
+	 * @return the stored calculations
+	 */
+	public ArrayList<ArrayList<Long>> getCalculations() {
+		return calculations;
+	}
+	
+	
+	
+	/**
 	 * @param xValue the given value of x
 	 * @return the evaluated term
 	 */
 	public long evaluate(int xValue) {
 		
-		if (this.multiplier == 0) { // anything multiplied by 0 is 0
+		if (this.multiplier == 0 || xValue == 0) { // anything multiplied by 0 is 0
 			return 0;
 		}
 		else {

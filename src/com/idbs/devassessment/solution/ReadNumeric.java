@@ -74,7 +74,7 @@ public class ReadNumeric extends ReadData {
  		   
  		    String action = numeric_term.charAt(0) + "";
  		   
- 		    Term term = new Term(power, multiplier, action);
+ 		   Term term = new Term(power, multiplier, action);
  		    equation.addTerm(term); // add terms to equation object 
 		}  
 

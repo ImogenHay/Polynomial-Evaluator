@@ -81,7 +81,7 @@ public abstract class ReadData {
 	@Override
 	public String toString() {
 		// shows equation, x value and result of evaluation
-		return this.equation.toString() + " = " + this.equation.evaluate(this.getXValue()) + " (x=" + this.getXValue() + ")";
+		return this.equation.toString() + " = " + this.equation.evaluate(this.getXValue()) + " (x=" + this.getXValue() + ")\n";
 	}
 	
 }
