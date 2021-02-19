@@ -25,34 +25,31 @@ public class CandidateSolution extends CandidateSolutionBase
 
         return DifficultyLevel.LEVEL_3;
     }
-
     
     
-    @Override
-    public String getAnswer() throws IDBSSolutionException
-    {
+    
+    /**
+	 * @param data
+	 * @return result of evaluating polynomial
+	 */
+    public String determineInputFormat(String data) {
     	
-        // first get Json as a String for the question using the inherited method...
-        String data = getDataForQuestion();  
-        
-        String json = "";
+    	String input = "";
         int prefix = data.indexOf(":");
         if (prefix != -1) {
-        	json = data.substring(prefix+1,data.length()); // this will remove prefix
+        	input = data.substring(prefix+1,data.length()); // this will remove prefix
         }
-
-        
+      
         ReadData reader = null; // subclass of ReadData used will depend on input format
         
-        System.out.println(json);
         
         try {
         	
         	if(data.startsWith("json")) { // can add alternative formats
-            	reader = new ReadJson(json);
+            	reader = new ReadJson(input);
             }
             else if(data.startsWith("numeric")) {
-            	reader = new ReadNumeric(json);
+            	reader = new ReadNumeric(input);
             }   
         	
         	return reader.getResult();
@@ -64,8 +61,17 @@ public class CandidateSolution extends CandidateSolutionBase
         catch( Exception e ) { // if other error occurs
         	return null;
         }
-        
-            
+    }
+
+    
+    
+    @Override
+    public String getAnswer() throws IDBSSolutionException
+    { 	
+        // first get Json as a String for the question using the inherited method...
+        String data = getDataForQuestion();  
+        // method determines input format and calculates result
+        return this.determineInputFormat(data);      
             
     }
 
