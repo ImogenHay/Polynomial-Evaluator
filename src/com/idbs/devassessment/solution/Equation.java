@@ -15,8 +15,11 @@ import com.idbs.devassessment.harness.DigitalTaxTracker;
  * Defines fields and methods of Equation and allows you to evaluate its terms 
  *
  */
-public class Equation implements Calculations {
+public class Equation {
 	
+	// in each sub array third value is result, first and second values are valued added
+	static ArrayList<ArrayList<Long>> calculations = new ArrayList<ArrayList<Long>>();
+		
 	/** List of Term objects in Equation*/
 	private List<Term> terms = null;
 

@@ -43,6 +43,7 @@ public class CalculationsTest {
 		
 	}
 	
+	
 	@Test // tests Calculation is storing all previous calculations including for previous polynomials
 	public void testCalculation2() {
 		Equation equation = new Equation();

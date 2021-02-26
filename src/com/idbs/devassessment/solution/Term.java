@@ -7,9 +7,9 @@ package com.idbs.devassessment.solution;
 
 /**
  * @author imogenhay
- * Defines fields and methods of Term and allows you to evaluate term for given x.
+ * Defines fields and methods of Term
  */
-public class Term implements Calculations{
+public class Term {
 
 	private int power = 0;
 	private int multiplier = 0;
