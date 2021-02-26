@@ -11,7 +11,7 @@ ReadJson - Defines the fields and methods of different json input type
 
 ReadNumeric - Defines the fields and methods of different numeric input type
 
-Term - Defines fields and methods of Term and allows you to evaluate term for given x
+Term - Defines fields and methods of Term
 
 Equation - Defines fields and methods of Equation and allows you to evaluate its terms
 
