@@ -114,13 +114,12 @@ public class EquationTest {
 	public void testPreviouslyCalculated() {
 		Equation equation = new Equation();
 		
-		ArrayList<Long> calculation = new ArrayList<Long>();
-		calculation.add((long) 1);
-		calculation.add((long) 2);
-		calculation.add((long) 3);
-		equation.getCalculations().add(calculation);
+
 		
-		assertEquals(calculation ,equation.previouslyCalculated(2,1));
+		String calculation = 1 + "+" + 2; // stores calculation
+		equation.getCalculations().put(calculation,(long)3);
+		
+		assertTrue(3 == equation.previouslyCalculated(2,1));
 	}
 	
 	

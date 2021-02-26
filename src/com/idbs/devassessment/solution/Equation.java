@@ -4,6 +4,7 @@
 package com.idbs.devassessment.solution;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.idbs.devassessment.harness.DigitalTaxTracker;
@@ -17,8 +18,8 @@ import com.idbs.devassessment.harness.DigitalTaxTracker;
  */
 public class Equation {
 	
-	// in each sub array third value is result, first and second values are valued added
-	static ArrayList<ArrayList<Long>> calculations = new ArrayList<ArrayList<Long>>();
+	/** Hash map linking calculation to result */
+	static HashMap<String, Long> calculations = new HashMap<String, Long>();
 		
 	/** List of Term objects in Equation*/
 	private List<Term> terms = null;
@@ -51,7 +52,7 @@ public class Equation {
 	/**
 	 * @return the stored calculations
 	 */
-	public ArrayList<ArrayList<Long>> getCalculations() {
+	public HashMap<String, Long> getCalculations() {
 		return calculations;
 	}
 	
@@ -60,19 +61,23 @@ public class Equation {
 	 * @param a, b, checks if they have been added together previously
 	 * @return previous calculation, or null if not found
 	 */
-	public ArrayList<Long> previouslyCalculated(long a, long b) {
-		ArrayList<Long> prevCalc = null;
-		for(ArrayList<Long> calculation : calculations) { // checks if current calculation has previously been calculated
-			if(calculation.get(0) == b && calculation.get(1) == a) {
-				prevCalc = calculation;
-				break; // so does not loop through rest of array if found answer
-			}
-			else if(calculation.get(0) == a && calculation.get(1) == b) { // order of addition does not effect result
-				prevCalc = calculation;
-				break;
-			}
+	public Long previouslyCalculated(long a, long b) {
+		Long prevCalcResult = calculations.get(a + "+" + b);  // checks if current calculation has previously been calculated
+		if (prevCalcResult == null) {
+			prevCalcResult = calculations.get(b + "+" + a); // so order of addition does not effect result
 		}
-		return prevCalc;
+		
+//		for(ArrayList<Long> calculation : calculations) { // checks if current calculation has previously been calculated
+//			if(calculation.get(0) == b && calculation.get(1) == a) {
+//				prevCalc = calculation;
+//				break; // so does not loop through rest of array if found answer
+//			}
+//			else if(calculation.get(0) == a && calculation.get(1) == b) { // order of addition does not effect result
+//				prevCalc = calculation;
+//				break;
+//			}
+//		}
+		return prevCalcResult;
 	}
 	
 	
@@ -94,20 +99,13 @@ public class Equation {
 				
 				else {
 					long current = result;
-					ArrayList<Long> previousCalculation = previouslyCalculated(current,evaluated);
+					Long previousCalculation = previouslyCalculated(current,evaluated);
 					
 					if(previousCalculation != null) { // if previously calculated use previous result
-						result = previousCalculation.get(2);
+						result = previousCalculation;
 					}
 					else {
-						result = DigitalTaxTracker.add(current, evaluated); // add a to itself b times
-						
-						ArrayList<Long> calculation = new ArrayList<Long>(); // stores calculation
-						calculation.add(current);
-						calculation.add(evaluated);
-						calculation.add(result);
-						calculations.add(calculation);
-						//System.out.println(calculation); // for debugging
+						result = this.add(current, evaluated); //calculates result and stores calculation
 					}	
 				}			
 			}			
@@ -171,10 +169,10 @@ public class Equation {
 				valueToAdd = a;
 			}
 			
-			ArrayList<Long> previousCalculation = previouslyCalculated(current,valueToAdd);
+			Long previousCalculation = previouslyCalculated(current,valueToAdd);
 			
 			if(previousCalculation != null) { // if previously calculated use previous result
-				result = previousCalculation.get(2);
+				result = previousCalculation;
 			}
 			else {
 				result = this.add(current, valueToAdd);			
@@ -198,11 +196,8 @@ public class Equation {
 	private long add(long value1, long value2) {
 		long result = DigitalTaxTracker.add(value1, value2);
 		
-		ArrayList<Long> calculation = new ArrayList<Long>(); // stores calculation
-		calculation.add(value1);
-		calculation.add(value2);
-		calculation.add(result);
-		calculations.add(calculation);
+		String calculation = value1 + "+" + value2; // stores calculation
+		calculations.put(calculation,result);
 		//System.out.println(calculation); // for debugging
 		
 		return result;
