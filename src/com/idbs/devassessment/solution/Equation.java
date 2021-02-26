@@ -78,10 +78,10 @@ public class Equation implements Calculations {
 	 * @param xValue to substituted into equation
 	 * @return the evaluated equation
 	 */
-	public long evaluate(int xValue) {
+	public long evaluatePolynomial(int xValue) {
 		long result = 0;
-		for(Term term : terms) {	
-			long evaluated = term.evaluate(xValue);
+		for(Term term : this.terms) {	
+			long evaluated = this.evaluateTerm(term, xValue);
 			
 			if (evaluated != 0) { // so wont do addition of zeros
 				
@@ -110,6 +110,120 @@ public class Equation implements Calculations {
 			}			
 		}
 		//System.out.println(calculations.size()); // for debugging
+		return result;
+	}
+	
+	
+	
+	/**
+	 * @param xValue the given value of x
+	 * @return the evaluated term
+	 */
+	public long evaluateTerm(Term term, int xValue) {
+		
+		if (term.getMultiplier() == 0 || xValue == 0) { // anything multiplied by 0 is 0
+			return 0;
+		}
+		else {
+			long result = exponent(xValue, term.getPower()); // calculate indices first (BIDMAS)
+
+			result = multiply(result,term.getMultiplier()); // multiply result by multiplier
+
+			if(term.getAction().equals("subtract") || term.getAction().equals("-")) { // makes result negative if action is subtract
+				result = -result;
+			}
+			
+			return result;
+		}
+
+	}
+	
+	
+	
+	/**
+	 * @param a, b terms to be multiplied by each other
+	 * @return result of multiplication
+	 */
+	private long multiply(long a, long b) {
+		
+		if(b > a) { // b should be smaller than a to reduce amount of loops
+			long temp = a;
+			a = b;
+			b = temp;			
+		}
+			
+		long result = a; // if a multiplied by 1 result will be a
+		long twoA = 0; // will store value of a + a
+		long valueToAdd = 0;
+		
+		for (int i = 1; i < b; i++) { 
+			long current = result;
+			
+			// if a is going to be added to result more than one more time, and twoA has been calculated
+			if (b > (i+1) && i != 1) { 
+				valueToAdd = twoA; // add two a's in one addition since already know what a+a is
+				i++; // skips two steps since did two additions in one
+			}
+			else {
+				valueToAdd = a;
+			}
+			
+			ArrayList<Long> previousCalculation = previouslyCalculated(current,valueToAdd);
+			
+			if(previousCalculation != null) { // if previously calculated use previous result
+				result = previousCalculation.get(2);
+			}
+			else {
+				result = this.add(current, valueToAdd);			
+			}	
+			
+			if (i == 1) { // first iteration will be when value is added to itself, this will be 2* a
+				twoA = result; // stores so that 2 steps can be done in one addition
+			}
+			//System.out.println(i); // for debugging
+			//System.out.println(current + " + " + valueToAdd + " = " + result); // for debugging
+		}
+		return result;
+	}
+	
+	
+	
+	/**
+	 * @param values to be added together
+	 * @return result of value1 + value2
+	 */
+	private long add(long value1, long value2) {
+		long result = DigitalTaxTracker.add(value1, value2);
+		
+		ArrayList<Long> calculation = new ArrayList<Long>(); // stores calculation
+		calculation.add(value1);
+		calculation.add(value2);
+		calculation.add(result);
+		calculations.add(calculation);
+		//System.out.println(calculation); // for debugging
+		
+		return result;
+	}
+	
+
+	
+	/**
+	 * @param x the given value of x
+	 * @param p the given value of power
+	 * @return result of x to the power of p
+	 */
+	private long exponent(long x, int p) {
+		long result = x; //so if p == 1 default to x
+		
+		if(p == 0) { // anything to the power of 0 evaluates to 1
+			result = 1;
+		}
+		else { 
+			for(int i = 1; i < p; i++) { // multiply x by x, p times
+				result = multiply(result,x);
+			}
+		}
+		
 		return result;
 	}
 

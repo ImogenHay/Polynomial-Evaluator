@@ -67,7 +67,7 @@ public class EquationTest {
 	
 	
 	@Test // tests evaluation works 
-	public void testEvaluate() { 
+	public void testEvaluatePolynomial() { 
 		
 		Equation equation = new Equation();
 		
@@ -81,12 +81,12 @@ public class EquationTest {
 		equation.addTerm(term3);
 		equation.addTerm(term4);	
 		
-		assertEquals(-1976 ,equation.evaluate(6));
+		assertEquals(-1976 ,equation.evaluatePolynomial(6));
 	}
 	
 	
 	@Test // tests evaluation works when x is zero
-	public void testEvaluateZeroX() { 
+	public void testEvaluatePolynomialZeroX() { 
 		Equation equation = new Equation();
 		
 		Term term1 = new Term(2, 7, "-");
@@ -99,14 +99,14 @@ public class EquationTest {
 		equation.addTerm(term3);
 		equation.addTerm(term4);	
 		
-		assertEquals(0 ,equation.evaluate(0));
+		assertEquals(0 ,equation.evaluatePolynomial(0));
 	}
 	
 	
 	@Test // tests evaluation works when no terms
-	public void testEvaluateZeroMultiplier() {
+	public void testEvaluatePolynomialZeroMultiplier() {
 		Equation equation = new Equation();
-		assertEquals(0 ,equation.evaluate(6));
+		assertEquals(0 ,equation.evaluatePolynomial(6));
 	}
 	
 	
@@ -121,6 +121,38 @@ public class EquationTest {
 		equation.getCalculations().add(calculation);
 		
 		assertEquals(calculation ,equation.previouslyCalculated(2,1));
+	}
+	
+	
+	@Test // test it will not return calculation if not previously calculated
+	public void testNotPreviouslyCalculated() {
+		Equation equation = new Equation();
+		
+		assertNull(equation.previouslyCalculated(4,1));
+	}
+	
+	
+	@Test // tests evaluation works 
+	public void testEvaluateTerm() { 
+		Equation equation = new Equation();
+		Term term = new Term(9, 10, "-");		
+		assertEquals(-100776960 ,equation.evaluateTerm(term,6));
+	}
+	
+	
+	@Test // tests evaluation works when x is zero
+	public void testEvaluateZeroX() { 
+		Equation equation = new Equation();
+		Term term = new Term(9, 10, "+");	
+		assertTrue(0 == equation.evaluateTerm(term,0));
+	}
+	
+	
+	@Test // tests evaluation works when multiplier is zero
+	public void testEvaluateZeroMultiplier() {
+		Equation equation = new Equation();
+		Term term = new Term(9, 0, "-");
+		assertEquals(0 ,equation.evaluateTerm(term,6));
 	}
 	
 

@@ -37,7 +37,7 @@ public class CalculationsTest {
 		equation.addTerm(term2);
 		equation.addTerm(term3);
 		equation.addTerm(term4);
-		equation.evaluate(5);
+		equation.evaluatePolynomial(5);
 		
 		assertEquals(14, equation.getCalculations().size());
 		
@@ -56,7 +56,7 @@ public class CalculationsTest {
 		equation.addTerm(term2);
 		equation.addTerm(term3);
 		equation.addTerm(term4);
-		equation.evaluate(5);
+		equation.evaluatePolynomial(5);
 
 		assertEquals(15, equation.getCalculations().size());
 		
