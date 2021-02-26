@@ -63,7 +63,7 @@ public abstract class ReadData {
 	public String getResult() {
 		int xValue = this.getXValue();
 		this.generateTerms();
-		System.out.println(this.toString()); // for debugging
+		//System.out.println(this.toString()); // for debugging
 		return Long.toString(this.equation.evaluatePolynomial(xValue));
 	}
 

@@ -127,7 +127,7 @@ public class EquationTest {
 	public void testNotPreviouslyCalculated() {
 		Equation equation = new Equation();
 		
-		assertNull(equation.previouslyCalculated(4,1));
+		assertNull(equation.previouslyCalculated(4435335,1121234));
 	}
 	
 	

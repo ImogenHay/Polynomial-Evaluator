@@ -66,17 +66,6 @@ public class Equation {
 		if (prevCalcResult == null) {
 			prevCalcResult = calculations.get(b + "+" + a); // so order of addition does not effect result
 		}
-		
-//		for(ArrayList<Long> calculation : calculations) { // checks if current calculation has previously been calculated
-//			if(calculation.get(0) == b && calculation.get(1) == a) {
-//				prevCalc = calculation;
-//				break; // so does not loop through rest of array if found answer
-//			}
-//			else if(calculation.get(0) == a && calculation.get(1) == b) { // order of addition does not effect result
-//				prevCalc = calculation;
-//				break;
-//			}
-//		}
 		return prevCalcResult;
 	}
 	
@@ -105,7 +94,16 @@ public class Equation {
 						result = previousCalculation;
 					}
 					else {
-						result = this.add(current, evaluated); //calculates result and stores calculation
+						if (current < 0 || evaluated < 0) {
+							result = DigitalTaxTracker.add(current, evaluated);
+						}
+						else {
+							result = this.columnAddition(current, evaluated); //calculates result and stores calculation
+						}
+						String calculation = current + "+" + evaluated; // stores calculation
+						calculations.put(calculation,result);
+						
+						
 					}	
 				}			
 			}			
@@ -175,7 +173,8 @@ public class Equation {
 				result = previousCalculation;
 			}
 			else {
-				result = this.add(current, valueToAdd);			
+				result = this.columnAddition(current, valueToAdd);	
+				//result = DigitalTaxTracker.add(current, valueToAdd);
 			}	
 			
 			if (i == 1) { // first iteration will be when value is added to itself, this will be 2* a
@@ -184,6 +183,7 @@ public class Equation {
 			//System.out.println(i); // for debugging
 			//System.out.println(current + " + " + valueToAdd + " = " + result); // for debugging
 		}
+		//System.out.println(a + " * " + b + " = " + result); // for debugging
 		return result;
 	}
 	
@@ -193,17 +193,90 @@ public class Equation {
 	 * @param values to be added together
 	 * @return result of value1 + value2
 	 */
-	private long add(long value1, long value2) {
-		long result = DigitalTaxTracker.add(value1, value2);
+	private long columnAddition(long a, long b) {
+
+		String longer = Long.toString(a); // for column addition need to know length of longer number since that is number of rows
+		String shorter = Long.toString(b);
+		if (a < b) {
+			longer = Long.toString(b);
+			shorter = Long.toString(a);
+		}
+					
+		String finalResult = "";
+		int carryDigit = 0; // if result of addition > 1 digit first digit must be carried over
 		
-		String calculation = value1 + "+" + value2; // stores calculation
-		calculations.put(calculation,result);
-		//System.out.println(calculation); // for debugging
+		for (int i = 1; i <= longer.length(); i++) {
+			
+			
+			char topDigit = longer.charAt(longer.length()-i); 
+			int rowResult = Character.getNumericValue(topDigit); 
+			
+			if (i-1 < shorter.length()) { // only add bottom digit if value in this column
+				char bottomDigit = shorter.charAt(shorter.length()-i);
+				rowResult = (int)this.add((long)rowResult, (long)Character.getNumericValue(bottomDigit));
+
+			}
+			
+						
+			if (carryDigit != 0) { // if carryDigit from previous addition it must be added
+				rowResult = (int)this.add((long)rowResult, carryDigit);
+				carryDigit = 0;
+			}
+			
+			
+			if (String.valueOf(rowResult).length() > 1) { // if result of addition > 1 digit first digit must be carried over
+				carryDigit = Integer.parseInt(Integer.toString(rowResult).substring(0, 1)); // carryDigit is fist digit in result of addition
+				rowResult = rowResult % 10; // result of this row is last digit in result of addition
+			}
+			
+			finalResult = rowResult + finalResult; // this is not an addition, just concatenating strings
+			
+		}
+	
+		if (carryDigit != 0) { 
+			finalResult = carryDigit + finalResult; // this is not an addition, just concatenating strings
+		}
+	
+		
+		//if (Long.parseLong(finalResult) != (a+b)) {
+			//System.out.println(a + " + " + b + " = " + Long.parseLong(finalResult) + " = " + (a+b));
+		//}
+		return Long.parseLong(finalResult);
+	}
+	
+	
+	
+	/**
+	 * @param values to be added together
+	 * @return result of value1 + value2
+	 */
+	private long add(long value1, long value2) {
+		long result = 0;
+		if (value1 == 0) { // adding 0 to value will return value
+			result = value2;
+		}
+		else if (value2 == 0) {
+			result = value1;
+		}
+		else {
+			Long previousCalculation = previouslyCalculated(value1,value2);
+			
+			if(previousCalculation != null) { // if previously calculated use previous result
+				result = previousCalculation;
+			}
+			
+			else {
+				result = DigitalTaxTracker.add(value1, value2);			
+				String calculation = value1 + "+" + value2; // stores calculation
+				calculations.put(calculation,result);
+			}	
+		}
+		
 		
 		return result;
 	}
 	
-
+		
 	
 	/**
 	 * @param x the given value of x
