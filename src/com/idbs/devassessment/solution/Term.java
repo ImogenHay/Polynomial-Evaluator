@@ -51,28 +51,10 @@ public class Term implements Calculations{
 	
 	
 	/**
-	 * @param power the power to set
-	 */
-	public void setPower(int power) {
-		this.power = power;
-	}
-
-	
-	
-	/**
 	 * @return the multiplier
 	 */
 	public int getMultiplier() {
 		return this.multiplier;
-	}
-
-	
-	
-	/**
-	 * @param multiplyer the multiplier to set
-	 */
-	public void setMultiplier(int multiplier) {
-		this.multiplier = multiplier;
 	}
 
 	
@@ -84,15 +66,6 @@ public class Term implements Calculations{
 		return this.action;
 	}
 
-	
-	
-	/**
-	 * @param action the action to set
-	 */
-	public void setAction(String action) {
-		this.action = action;
-	}
-	
 	
 	
 	/**

@@ -40,14 +40,6 @@ public class TermTest {
 	
 	
 	@Test
-	public void testSetPower() {
-		Term term = new Term(9, 10, "-");
-		term.setPower(0);
-		assertEquals(0 ,term.getPower());
-	}
-	
-	
-	@Test
 	public void testGetMultiplier() {
 		Term term = new Term(9, 10, "-");
 		assertEquals(10 ,term.getMultiplier());
@@ -55,25 +47,9 @@ public class TermTest {
 	
 	
 	@Test
-	public void testSetMultiplier() {
-		Term term = new Term(9, 10, "-");
-		term.setMultiplier(5);
-		assertEquals(5 ,term.getMultiplier());
-	}
-	
-	
-	@Test
 	public void testGetAction() {
 		Term term = new Term(9, 10, "+");
 		assertEquals("+" ,term.getAction());
-	}
-	
-	
-	@Test
-	public void testSetAction() {
-		Term term = new Term(9, 10, "-");
-		term.setAction("add");
-		assertEquals("add" ,term.getAction());
 	}
 	
 	
