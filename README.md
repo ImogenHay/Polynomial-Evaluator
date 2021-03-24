@@ -1,5 +1,3 @@
-My solution to the IDBS Assessment.
-
 Retrievs polynomials from multiple input formats.
 Evaluates them using only ADD and SUBTRACT.
 
